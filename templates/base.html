@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}會員系統{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="logo">會員系統</a>
+            
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}">首頁</a></li>
+                </ul>
+                
+                <div class="nav-auth">
+                    {% if session.get('user_id') %}
+                        <a href="{{ url_for('dashboard') }}">儀表板</a>
+                        <a href="{{ url_for('logout') }}" class="auth-btn">登出</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="auth-btn">登入</a>
+                        <a href="{{ url_for('register') }}" class="auth-btn">註冊</a>
+                        <a href="{{ url_for('dashboard') }}">會員大廳</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容區 -->
+    <main class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2024 會員系統. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

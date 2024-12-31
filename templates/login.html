@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="login-form">
+        <h2>登入</h2>
+        
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="form-group">
+                <label for="username">使用者名稱</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">密碼</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <div class="form-group checkbox">
+                <label>
+                    <input type="checkbox" name="remember"> 記住我
+                </label>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">登入</button>
+            </div>
+            
+            <div class="form-links">
+                <a href="{{ url_for('register') }}">註冊新帳號</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

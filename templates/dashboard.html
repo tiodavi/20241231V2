@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}會員中心{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>歡迎回來，{{ user['username'] }}</h1>
+        <p>上次登入時間：{{ user['last_login'] }}</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- 快速功能區 -->
+        <div class="dashboard-card">
+            <h3>個人資料</h3>
+            <div class="card-content">
+                <p><strong>用戶名：</strong> {{ user['username'] }}</p>
+                <p><strong>電子郵件：</strong> {{ user['email'] }}</p>
+                <p><strong>註冊時間：</strong> {{ user['created_at'] }}</p>
+                <a href="{{ url_for('profile') }}" class="btn">編輯資料</a>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>帳號安全</h3>
+            <div class="card-content">
+                <a href="{{ url_for('change_password') }}" class="btn">修改密碼</a>
+                {% if not user['is_verified'] %}
+                    <a href="{{ url_for('verify_email') }}" class="btn btn-warning">驗證電子郵件</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- 可以根據需求添加更多功能卡片 -->
+    </div>
+</div>
+{% endblock %} 

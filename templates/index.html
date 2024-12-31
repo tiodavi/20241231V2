@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>歡迎來到會員系統</h1>
+    <div class="buttons">
+        <a href="{{ url_for('login') }}" class="btn">登入</a>
+        <a href="{{ url_for('register') }}" class="btn">註冊</a>
+    </div>
+</div>
+{% endblock %}
